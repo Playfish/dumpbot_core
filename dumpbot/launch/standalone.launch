@@ -1,0 +1,13 @@
+<!-- Example/standalone launcher for Dumpbot sending goal based on navigation with map -->
+
+<launch>
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager"  args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="dumpbot" args="load dumpbot/Dumpbot nodelet_manager">
+    <remap from="/dumpbot_serial_func/data" to="/dumpbot_serial_func/data"/>
+	<remap from="/move_base_simple/goal" to="/move_base_simple/goal"/>
+	<param name="goal_posistion_x" type="double" value="0.0"/>
+	<param name="goal_posistion_y" type="double" value="0.0"/>
+	<param name="goal_posistion_z" type="double" value="0.0"/>
+    <param name="goal_orientation_z" type="double" value="0.0"/>
+  </node>
+</launch>

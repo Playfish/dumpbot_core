@@ -1,0 +1,9 @@
+<!-- Example/standalone launcher for dumpbot serial func -->
+
+<launch>
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager"  args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="dumpbot_serial_func" args="load dumpbot_seiral_func/DumpbotSerialFunc nodelet_manager">
+	<remap from="data" to="data"/>
+	<param name="serialNumber" type="string" value="/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0"/>
+  </node>
+</launch>

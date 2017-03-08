@@ -1,0 +1,8 @@
+<library path="lib/libdumpbot_serial_func">
+  <class name="dumpbot_seiral_func/DumpbotSerialFunc" type="dumpbot_seiral_func::DumpbotSerialFunc" base_class_type="nodelet::Nodelet">
+    <description>
+      Drivers for dumpbot.
+    </description>
+  </class>
+</library>
+
