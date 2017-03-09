@@ -65,15 +65,15 @@ private:
    */
   virtual void onInit()
   {
-	ros::NodeHandle& nh = getNodeHandle();
-	ros::NodeHandle& private_nh = getPrivateNodeHandle();
+    ros::NodeHandle& nh = getNodeHandle();
+    ros::NodeHandle& private_nh = getPrivateNodeHandle();
 
     private_nh.getParam("goal_posistion_x", goal_x_);
     private_nh.getParam("goal_posistion_y", goal_y_);
     private_nh.getParam("goal_posistion_z", goal_z_);
     private_nh.getParam("goal_orientation_z", orien_z_);
     ROS_INFO_STREAM("Init goal_position_x: "<<goal_x_<<" goal_position_y: "<<goal_y_<<" goal_position_z: "<<goal_z_<<" goal_orientation_z: "<<orien_z_<<" .");
-	goalpub_ = private_nh.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal",1);
+    goalpub_ = private_nh.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal",1);
     sub_ = nh.subscribe<std_msgs::String>("/dumpbot_serial_func/data", 1, &Dumpbot::changeDataCb, this);
   }
 
@@ -84,21 +84,21 @@ private:
    * @param MCU data message.
    */
   void changeDataCb(const std_msgs::String::ConstPtr& data){
-	std::string determineData= data->data.c_str();
+    std::string determineData= data->data.c_str();
 //	ROS_INFO("Yes! I heard:[%s]",determineData.c_str());
 
 	// load and parse data into int 
 		
 	// if data right then send goal
     geometry_msgs::PoseStamped next_goal;
-    next_goal.header.frame_id="/map";
-    next_goal.pose.position.x=goal_x_;
-    next_goal.pose.position.y=-goal_y_;
-    next_goal.pose.position.z=goal_z_;
-    next_goal.pose.orientation.x=0.0;
-    next_goal.pose.orientation.y=0.0;
-    next_goal.pose.orientation.z=orien_z_;
-    next_goal.pose.orientation.w=1.0;
+    next_goal.header.frame_id = "/map";
+    next_goal.pose.position.x = goal_x_;
+    next_goal.pose.position.y = goal_y_;
+    next_goal.pose.position.z = goal_z_;
+    next_goal.pose.orientation.x = 0.0;
+    next_goal.pose.orientation.y = 0.0;
+    next_goal.pose.orientation.z = orien_z_;
+    next_goal.pose.orientation.w = 1.0;
     goalpub_.publish(next_goal);
   }
     
