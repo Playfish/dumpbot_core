@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>dumpbot_serial_func</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>The dumpbot_serial_func package for getting data of dumpbot from MCU</description>
 
   <maintainer email="1271087623@qq.comd">Carl</maintainer>
