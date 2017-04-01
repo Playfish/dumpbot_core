@@ -76,7 +76,19 @@ private:
     goalpub_ = private_nh.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal",1);
     sub_ = nh.subscribe<std_msgs::String>("/dumpbot_serial_func/data", 1, &Dumpbot::changeDataCb, this);
   }
-
+  
+  int hexstring2char(const std::string& str, char* out){
+    int n = 0;
+    int temp;
+    std::istringstream iss(str);
+    iss >> std::hex;
+    while (iss >> temp)
+    {
+        out[n++] = temp;
+        iss.get();
+    }
+    return n;
+  }
   /*!
    * @brief Callback for Dumpbot's MCU data.
    * Callback for Dumpbot's MCU data. It finds whether
@@ -85,8 +97,10 @@ private:
    */
   void changeDataCb(const std_msgs::String::ConstPtr& data){
     std::string determineData= data->data.c_str();
+    char buff[1024];
 //	ROS_INFO("Yes! I heard:[%s]",determineData.c_str());
-
+    std::cout << hexstring2char(determineData, buff);  //buff中输出结果
+    ROS_INFO_STREAM("Yes! I heard:[" <<buff<<" ].");
 	// load and parse data into int 
 		
 	// if data right then send goal
