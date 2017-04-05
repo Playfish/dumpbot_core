@@ -75,7 +75,7 @@ private:
     private_nh.getParam("goal_orientation_z", orien_z_);
     ROS_INFO_STREAM("Init goal_position_x: "<<goal_x_<<" goal_position_y: "<<goal_y_<<" goal_position_z: "<<goal_z_<<" goal_orientation_z: "<<orien_z_<<" .");
     goalpub_ = private_nh.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal",1);
-//    sub_ = nh.subscribe<std_msgs::String>("/dumpbot_serial_func/data", 1, &Dumpbot::changeDataCb, this);
+    sub_ = nh.subscribe<std_msgs::String>("/dumpbot_serial_func/data", 1, &Dumpbot::changeDataCb, this);
     sensorSub_ = nh.subscribe<dumpbot_msgs::SensorData>("/dumpbot_serial_func/sensordata", 1, &Dumpbot::changeSensorDataCb, this);
   }
   
