@@ -13,6 +13,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>dumpbot</run_depend>
   <run_depend>dumpbot_searial_func</run_depend>
+  <run_depend>dumpbot_msgs</run_depend>
 
   <export>
     <metapackage/>
