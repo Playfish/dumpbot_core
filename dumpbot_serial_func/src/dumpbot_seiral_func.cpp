@@ -104,7 +104,7 @@ private:
             if(0x22 == result_buf[0] && 1 == success_flag){
               for(int j=0;j<BUFSIZE;j++){
 //                ostream <<"test: ["<<count<<"]";
-                ostream <<hex << (unsigned char)result_buf[j]<<" 	"<<std::dec;
+                ostream <<hex << (unsigned char)result_buf[j]<<" "<<std::dec;
                }
               sensorMsg.ult_01 = (unsigned char)result_buf[3]<<8;
               sensorMsg.ult_01 = sensorMsg.ult_01 | (unsigned char)result_buf[4];
