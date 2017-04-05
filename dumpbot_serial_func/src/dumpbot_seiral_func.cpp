@@ -17,6 +17,7 @@
 #include <ecl/threads/thread.hpp>
 #include <pluginlib/class_list_macros.h>
 #include <dumpbot_serial_func/dumpbot_seiral_func.hpp>
+#include <dumpbot_msgs/SensorData.h>
 
 
 namespace dumpbot_seiral_func{
@@ -50,6 +51,7 @@ public:
 
     int count=0;
     cmdpub_ = nh.advertise<std_msgs::String>("data",100);
+    sensorpub_ = nh.advertise<dumpbot_msgs::SensorData>("sensordata",100);
     memset(buf, 0, sizeof(buf));
     memset(temp_buf, 0, sizeof(temp_buf));
     memset(result_buf, 0, sizeof(result_buf));
@@ -75,7 +77,7 @@ private:
       std::stringstream ostream;
       std::stringstream ostream_test;
       std_msgs::String testmsg;
-
+      dumpbot_msgs::SensorData sensorMsg;
       len = dumpbotdriver_.UART0_Recv(fd, buf,40);  
       if(len>0){
         for(int i = 0; i < len; i++){
@@ -102,11 +104,20 @@ private:
             if(0x22 == result_buf[0] && 1 == success_flag){
               for(int j=0;j<BUFSIZE;j++){
 //                ostream <<"test: ["<<count<<"]";
-                ostream <<hex << (unsigned char)result_buf[j]<<" "<<std::dec;
+                ostream <<hex << (unsigned char)result_buf[j]<<" 	"<<std::dec;
                }
+              sensorMsg.ult_01 = (unsigned char)result_buf[3]<<8;
+              sensorMsg.ult_01 = sensorMsg.ult_01 | (unsigned char)result_buf[4];
+              sensorMsg.ult_02 = (unsigned char)result_buf[6]<<8;
+              sensorMsg.ult_02 = sensorMsg.ult_02 | (unsigned char)result_buf[7];
+              sensorMsg.ult_03 = (unsigned char)result_buf[9]<<8;
+              sensorMsg.ult_03 = sensorMsg.ult_03 | (unsigned char)result_buf[10];
+              sensorMsg.ult_04 = (unsigned char)result_buf[12]<<8;
+              sensorMsg.ult_04 = sensorMsg.ult_04 | (unsigned char)result_buf[13];
               testmsg.data = ostream.str();
               ROS_INFO_STREAM("Received data: ["<<testmsg.data.c_str()<<"]");
               cmdpub_.publish(testmsg);
+              sensorpub_.publish(sensorMsg);
              }
             success_flag = 0;
             /****
@@ -137,10 +148,10 @@ private:
   ecl::Thread update_thread_;
   bool shutdown_requested_;
   ros::Publisher cmdpub_;
+  ros::Publisher sensorpub_;
   // ROS Parameters
   std::string serialNumber_;
   int baudRate_;
-  
     
     
 };

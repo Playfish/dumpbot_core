@@ -18,12 +18,14 @@
   <build_depend>std_msgs</build_depend>
   <build_depend>pluginlib</build_depend>
   <build_depend>ecl_threads</build_depend>
+  <build_depend>dumpbot_msgs</build_depend>
 
   <run_depend>nodelet</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>pluginlib</run_depend>
   <run_depend>ecl_threads</run_depend>
+  <run_depend>dumpbot_msgs</run_depend>
 
 
   <export> 
