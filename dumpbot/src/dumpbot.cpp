@@ -32,6 +32,7 @@
 #include <sstream>
 #include <std_msgs/Header.h>
 #include <stdlib.h>
+#include <dumpbot_msgs/SensorData.h>
 
 namespace dumpbot
 {
@@ -74,7 +75,8 @@ private:
     private_nh.getParam("goal_orientation_z", orien_z_);
     ROS_INFO_STREAM("Init goal_position_x: "<<goal_x_<<" goal_position_y: "<<goal_y_<<" goal_position_z: "<<goal_z_<<" goal_orientation_z: "<<orien_z_<<" .");
     goalpub_ = private_nh.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal",1);
-    sub_ = nh.subscribe<std_msgs::String>("/dumpbot_serial_func/data", 1, &Dumpbot::changeDataCb, this);
+//    sub_ = nh.subscribe<std_msgs::String>("/dumpbot_serial_func/data", 1, &Dumpbot::changeDataCb, this);
+    sensorSub_ = nh.subscribe<dumpbot_msgs::SensorData>("/dumpbot_serial_func/sensordata", 1, &Dumpbot::changeSensorDataCb, this);
   }
   
   int hexstring2char(const std::string& str, char* out){
@@ -95,13 +97,9 @@ private:
    * go take out trash or not.
    * @param MCU data message.
    */
-  void changeDataCb(const std_msgs::String::ConstPtr& data){
-    std::string determineData= data->data.c_str();
-    char buff[1024];
-//	ROS_INFO("Yes! I heard:[%s]",determineData.c_str());
-    std::cout << hexstring2char(determineData, buff);  //buff中输出结果
-    ROS_INFO_STREAM("Yes! I heard:[" <<buff<<" ].");
-	// load and parse data into int 
+  void changeSensorDataCb(const dumpbot_msgs::SensorData::ConstPtr& data){
+
+    ROS_INFO_STREAM("Yes! I heard:[ ult_01: " <<data->ult_01<<" ult_02: " <<data->ult_02<<" ult_03: " <<data->ult_03<<" ult_01: " <<data->ult_04<<" ].");
 		
 	// if data right then send goal
     geometry_msgs::PoseStamped next_goal;
@@ -115,8 +113,24 @@ private:
     next_goal.pose.orientation.w = 1.0;
     goalpub_.publish(next_goal);
   }
+  /*!
+   * @brief Callback for Dumpbot's MCU data.
+   * Callback for Dumpbot's MCU data. It finds whether
+   * go take out trash or not.
+   * @param MCU data message.
+   */
+  void changeDataCb(const std_msgs::String::ConstPtr& data){
+    std::string determineData= data->data.c_str();
+    char buff[1024];
+//	ROS_INFO("Yes! I heard:[%s]",determineData.c_str());
+    std::cout << hexstring2char(determineData, buff);  //buff中输出结果
+    ROS_INFO_STREAM("Yes! I heard:[" <<buff<<" ].");
+	// load and parse data into int 
+
+  }
     
   ros::Subscriber sub_;
+  ros::Subscriber sensorSub_;
   ros::Publisher goalpub_;
   
 

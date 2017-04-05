@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(dumpbot)
 
-find_package(catkin REQUIRED COMPONENTS geometry_msgs nodelet pluginlib nav_msgs std_msgs roscpp)
+find_package(catkin REQUIRED COMPONENTS geometry_msgs nodelet pluginlib nav_msgs std_msgs roscpp dumpbot_msgs)
 find_package(Boost REQUIRED)
 
 catkin_package(
   INCLUDE_DIRS
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS geometry_msgs nodelet roscpp nav_msgs std_msgs pluginlib
+  CATKIN_DEPENDS geometry_msgs nodelet roscpp nav_msgs std_msgs pluginlib dumpbot_msgs
   DEPENDS Boost 
 )
 
@@ -23,6 +23,8 @@ include_directories(
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME} src/dumpbot.cpp)
+add_dependencies(${PROJECT_NAME} dumpbot_msgs_gencpp)
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
