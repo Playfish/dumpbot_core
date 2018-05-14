@@ -1,0 +1,58 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[JLinkDriver]
+CStepIntDis=_ 0
+TraceBufferSize=0x00010000
+TraceStallIfFIFOFull=0x00000000
+TracePortSize=0x00000004
+[DebugChecksum]
+Checksum=-614147035
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[CodeCoverage]
+Enabled=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[Trace1]
+Enabled=0
+ShowSource=1
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[CallStackLog]
+Enabled=0
+[DriverProfiling]
+Enabled=0
+Mode=1
+Graph=0
+Symbiont=0
+Exclusions=
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Aliases]
+A0=_ "C:\Users\acer PC\Desktop\LQ_K60_VG主板例程\2015年10月22日\src\Project_Setting\Startup\start.c" ""
+A1=_ "C:\Users\acer PC\Desktop\LQ_K60_VG主板例程\2015年10月22日\src\Source\GPIO.c" ""
+A2=_ "C:\Users\acer PC\Desktop\LQ_K60_VG主板例程\2015年10月22日\src\Source\UART.c" ""
+A3=_ "C:\Users\acer PC\Desktop\LQ_K60_VG主板例程\2015年10月22日\src\User\main.c" ""
+A4=_ "C:\Users\acer PC\Documents\Tencent Files\1622542013\FileRecv\LQ_K60库\src\Project_Setting\Startup\start.c" ""
+A5=_ "G:\测试程序\龙邱K60开发库\LQ_K60库10.16版\src\Project_Setting\Startup\crt0.s" ""
+A6=_ "G:\测试程序\龙邱K60开发库\LQ_K60库10.16版\src\Project_Setting\Startup\start.c" ""
+Count=7
+SuppressDialog=1

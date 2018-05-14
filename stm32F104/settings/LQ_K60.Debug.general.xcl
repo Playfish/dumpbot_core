@@ -1,0 +1,17 @@
+"E:\fs\arm\arm\bin\armproc.dll" 
+
+"E:\fs\arm\arm\bin\armjlink2.dll" 
+
+"C:\Users\Administrator\Desktop\4_UART 发送\Debug\Exe\c.out" 
+
+--plugin "E:\fs\arm\arm\bin\armbat.dll" 
+
+--device_macro "E:\fs\arm\arm\config\debugger\NXP\Kxx.dmac" 
+
+--device_macro "E:\fs\arm\arm\config\debugger\NXP\Kxx_Trace.dmac" 
+
+--flash_loader "E:\fs\arm\arm\config\flashloader\NXP\FlashK60Dxxx128K.board" 
+
+
+
+
